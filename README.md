@@ -11,6 +11,8 @@ date of loading in the system, archiving time, operation status (success, error)
 
 ## Solution
 
+**Use VS2019 in administrator mode for IIS integration to work!!!**
+
 ### 1 - Create web app
 
 This application will be the frontend - the UI. This is where file upload logic is implemented.
@@ -41,7 +43,7 @@ Steps in VS 2019 Community:
 
 First, check solution files which should look like [here](src/WebApplication1).
 
-### 4.1 - Test projects in IIS Express
+### 4.1 - Test projects in IIS Express (optional)
 
 Configure apps to start on _F5_:
 
@@ -54,6 +56,24 @@ _yes_ to certifcate install -> browser window should be opened.
 
 You should have both apps running under _IIS Express_, check in system tray for _IIS Express_ icon.
 
-### 4.2 - Test projects in IIS
+### 4.2 - Test projects in IIS (this is the way)
 
-For this, you need to have IIS installed and configured.
+For this, you need to have IIS installed and configured
+([see this article](https://www.howtogeek.com/112455/how-to-install-iis-8-on-windows-8/)).
+
+We prefer IIS because both apps will be started automatically when navigated.
+**Also, start VS2019 in administrator mode!!!**
+
+Configure IIS:
+
+1. Go to project properties (right click) from solution explorer
+1. In _web_ tab, in _servers_ section select _local IIS_
+1. Hit _CTRL+S_ and confirm save
+
+Repeat for the second project.
+
+Open _IIS_ (just type _IIS_ in _Start_) and under _Default Web Site_ you should see both apps.
+They are navigatable using:
+
+* [http://localhost/WebApplication1](http://localhost/WebApplication1)
+* [http://localhost/WebApplication2](http://localhost/WebApplication2)
