@@ -203,9 +203,9 @@ Response should look like this:
         "Name": "see.zip",
         "FullName": "D:\\src\\github\\apphousero\\aph-interview-test-01\\src\\WebApplication1\\WebApplication2\\App_Data\\Upload\\see.zip",
         "Extension": ".zip",
-        "Length": 0,
+        "Length": 14,
         "CreationTime": "2020-11-10T17:53:21.1065436+02:00",
-        "LastWriteTime": "2020-11-10T17:53:21.1065436+02:00"
+        "LastWriteTime": "2020-11-10T18:12:13.876586+02:00"
     }
 ]
 ```
