@@ -36,3 +36,7 @@ Steps in VS 2019 Community:
 1. First page -> you can leave default
 1. Select _Web API_
 1. Create
+
+### 3 - Verify solution creation
+
+First, check solution files which should look like [here](src/WebApplication1).
