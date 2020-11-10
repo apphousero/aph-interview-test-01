@@ -90,7 +90,7 @@ Now we are setup and can move on to changing the source code.
 
 ## Source code solution
 
-### API aka backend - first part
+### API aka backend - first part - setup
 
 We need to create an file upload folder on the local disk (easiest option).
 The easiest way is to do it on app startup:
@@ -135,3 +135,15 @@ a _system.diagnostics_ section like this (the log file name will be *__.log*):
 
 Logging is setup the same for the frontend.
 [See this article on logging and tracing to file.](https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/how-to-create-and-initialize-trace-listeners)
+
+### API aka backend - second part - implementing API
+
+The default VS template for ASP.NET WebApi project already created a controller for us
+in _Controllers_ folder called _ValuesController_.
+
+We will start by creating an identical copy of that controller which we will call
+_FilesController_. This is where we will implement the backend for our frontend.
+
+So, hit _CTRL+C_ then _CTRL+V_ in same project folder (_Controllers_). Rename _ValuesController - Copy.cs_ to
+_FilesController.cs_. Rename class in file to _FilesController_ and
+[this](src/WebApplication1/WebApplication2/Controllers/FilesController.cs) is how it should look like.
