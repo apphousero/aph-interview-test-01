@@ -11,6 +11,11 @@ date of loading in the system, archiving time, operation status (success, error)
 
 ## Solution
 
+### Pre-requisites
+
+Need VS2019 and IIS installed. [See this article](https://www.howtogeek.com/112455/how-to-install-iis-8-on-windows-8/)
+for IIS install.
+
 **Use VS2019 in administrator mode for IIS integration to work!!!**
 
 ### 1 - Create web app
