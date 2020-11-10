@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
@@ -67,18 +68,44 @@ namespace WebApplication2.Controllers
         }
 
         // POST api/files
-        public void Post([FromBody] string value)
+        public Task<HttpResponseMessage> Post()
         {
+            var request = this.Request;
+            if (!request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            var provider = new MultipartFormDataStreamProvider(WebApiApplication.UploadDir);
+            var task = request.Content.ReadAsMultipartAsync(provider).
+                ContinueWith<HttpResponseMessage>(_ =>
+                {
+                    return new HttpResponseMessage
+                    {
+                        Content = new StringContent("File uploaded.")
+                    };
+                }
+            );
+            return task;
         }
 
         // PUT api/files/5
         public void Put(int id, [FromBody] string value)
         {
+            // Create HTTP Response.
+            var res = Request.CreateResponse(HttpStatusCode.OK);
+            res.StatusCode = HttpStatusCode.NotImplemented;
+            res.ReasonPhrase = "Not implemented.";
+            throw new HttpResponseException(res);
         }
 
         // DELETE api/files/5
         public void Delete(int id)
         {
+            // Create HTTP Response.
+            var res = Request.CreateResponse(HttpStatusCode.OK);
+            res.StatusCode = HttpStatusCode.NotImplemented;
+            res.ReasonPhrase = "Not implemented.";
+            throw new HttpResponseException(res);
         }
     }
 }

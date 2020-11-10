@@ -261,3 +261,10 @@ In order to activate this task at the startup of the application, we go back to 
 (the _cs_ part) and add this property ```public ZipProcessingTask ZipProcessingTask { get; private set; } = null;```
 then we call it in *Application_Start* event like this
 ```ZipProcessingTask = new ZipProcessingTask();```.
+
+#### Implementing file upload
+
+For this we change POST method in _FilesController_.
+
+Check implementation here
+[this link for implementation](src/WebApplication1/WebApplication2/Controllers/FilesController.cs).
