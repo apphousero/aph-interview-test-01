@@ -192,5 +192,5 @@ resolved at compile time) using LINQ like so:
 ```
 
 You can test with _Postman_ by creating a simple _GET_ request to
-[localhost/WebApplication2/api/files](localhost/WebApplication2/api/files). Don't forget to place
+[localhost/WebApplication2/api/files](http://localhost/WebApplication2/api/files). Don't forget to place
 some dummy files in there [App_Data/Uploads](src/WebApplication1/WebApplication2/App_Data/Uploads).
