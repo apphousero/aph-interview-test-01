@@ -40,3 +40,20 @@ Steps in VS 2019 Community:
 ### 3 - Verify solution creation
 
 First, check solution files which should look like [here](src/WebApplication1).
+
+### 4.1 - Test projects in IIS Express
+
+Configure apps to start on _F5_:
+
+1. Right click on solution
+1. Select _multiple startup projects_
+1. Set action for projects to _start_
+
+Hit _F5_ or select menu _debug_ -> _start debugging_, say _Yes_ to _IIS Express_ certificates,
+_yes_ to certifcate install -> browser window should be opened.
+
+You should have both apps running under _IIS Express_, check in system tray for _IIS Express_ icon.
+
+### 4.2 - Test projects in IIS
+
+For this, you need to have IIS installed and configured.
