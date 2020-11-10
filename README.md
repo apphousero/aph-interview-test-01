@@ -268,3 +268,18 @@ For this we change POST method in _FilesController_.
 
 Check implementation here
 [this link for implementation](src/WebApplication1/WebApplication2/Controllers/FilesController.cs).
+
+### Frontend - upload file
+
+First, let's delete all boiler plate code from _WebApplication1/Views/Home/Index.cshtml_.
+
+We will use [this link](https://getbootstrap.com/docs/4.0/components/forms/#file-browser) as a
+reference on file input with _Bootstrap CSS_.
+
+Most of the code is in the main _HomeController_ in _WebApplication1_. Most important is both
+implementations of the _Index_ action (the GET and the POST). GET returns the list of files from API
+and POST uploads a file to API.
+
+All view changes are done in _WebApplication1/Views/Home/Index.cshtml_.
+
+One more thing added to UI is a _web.config_ key for API URL as it is best practice called _api-url_.
