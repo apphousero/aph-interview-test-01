@@ -65,7 +65,10 @@ namespace WebApplication2.Tasks
             try
             {
                 // Get first file from upload folder that is not a zip file.
-                var first = Directory.GetFiles(WebApiApplication.UploadDir, "!*.zip")?.FirstOrDefault();
+                var first = Directory
+                    .GetFiles(WebApiApplication.UploadDir, "*.*", SearchOption.TopDirectoryOnly)
+                    .Where(_ => !_.EndsWith(".zip"))
+                    .FirstOrDefault();
                 // If none, return cause we have nothing to process for now.
                 if (string.IsNullOrWhiteSpace(first))
                     return;

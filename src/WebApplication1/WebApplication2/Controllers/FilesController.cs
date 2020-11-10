@@ -16,7 +16,7 @@ namespace WebApplication2.Controllers
         // GET api/files
         public IHttpActionResult Get()
         {
-            var files = Directory.GetFiles(WebApiApplication.UploadDir, "*.zip");
+            var files = Directory.GetFiles(WebApiApplication.UploadDir, "*.zip", SearchOption.TopDirectoryOnly);
             // Get file system info for each file.
             var res = from _ in files
                       select new FileInfo(_);
