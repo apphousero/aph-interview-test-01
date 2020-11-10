@@ -56,7 +56,7 @@ namespace WebApplication2.Controllers
             var fp = Path.Combine(UploadDir, id);
             if (!File.Exists(fp))
             {
-                res.StatusCode = HttpStatusCode.BadRequest;
+                res.StatusCode = HttpStatusCode.NotFound;
                 res.ReasonPhrase = $"File '{fp}' not found!";
                 throw new HttpResponseException(res);
             }
