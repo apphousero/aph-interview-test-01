@@ -39,6 +39,8 @@ namespace WebApplication2.Tasks
             this._timer.Interval = 1;
             this._timer.Elapsed += _timer_Elapsed;
             this.LastRun = DateTime.Now;
+            // Start timer.
+            this._timer.Start();
         }
 
         /// <summary>

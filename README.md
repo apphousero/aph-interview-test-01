@@ -256,3 +256,8 @@ In _WebApplication2_, in _references_, right click and add a reference to _Syste
 
 Create a folder _Tasks_ and add _ZipProcessingTask.cs_. Check
 [this link for implementation](src/WebApplication1/WebApplication2/Tasks/ZipProcessingTask.cs).
+
+In order to activate this task at the startup of the application, we go back to _Global.asax_ file 
+(the _cs_ part) and add this property ```public ZipProcessingTask ZipProcessingTask { get; private set; } = null;```
+then we call it in *Application_Start* event like this
+```ZipProcessingTask = new ZipProcessingTask();```.

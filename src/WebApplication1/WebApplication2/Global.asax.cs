@@ -7,11 +7,14 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebApplication2.Tasks;
 
 namespace WebApplication2
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+
+        public ZipProcessingTask ZipProcessingTask { get; private set; } = null;
 
         protected void Application_Start()
         {
@@ -27,7 +30,10 @@ namespace WebApplication2
             {
                 Directory.CreateDirectory(uploadDir);
                 System.Diagnostics.Trace.TraceInformation($"Created '{uploadDir}' for uploads!");
-            }                
+            }
+
+            // Start processing task.
+            ZipProcessingTask = new ZipProcessingTask();
         }
 
         protected void Application_Error()
