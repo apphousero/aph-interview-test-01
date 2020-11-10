@@ -147,3 +147,50 @@ _FilesController_. This is where we will implement the backend for our frontend.
 So, hit _CTRL+C_ then _CTRL+V_ in same project folder (_Controllers_). Rename _ValuesController - Copy.cs_ to
 _FilesController.cs_. Rename class in file to _FilesController_ and
 [this](src/WebApplication1/WebApplication2/Controllers/FilesController.cs) is how it should look like.
+
+#### Implementing files controller
+
+Let's first use a convention for the upload dir value by implementing a static property
+on the _FilesController_ like this:
+
+```csharp
+        /// <summary>
+        /// Gets upload dir.
+        /// </summary>
+        public static string UploadDir
+        {
+            get { return HttpContext.Current.Server.MapPath("~/App_Data/Upload"); }
+        }
+```
+
+Now let's implement the _Get()_ method. As a convention, get methods with no parameters
+retrieve lists. In our case the method will return the list of _zip_ files from upload
+folder. Also, we will not create a separate class for _DTO (Data Transfer Object)_
+so we will return a serializable list of anonymous type objects (these are
+resolved at compile time) using LINQ like so:
+
+```csharp
+// GET api/files
+        public IHttpActionResult Get()
+        {
+            var files = Directory.GetFiles(UploadDir, "*.zip");
+            // Get file system info for each file.
+            var res = from _ in files
+                      select new FileInfo(_);
+            // Return file info as serializable DTO.
+            return this.Ok(from _ in res
+                    select new 
+                    {
+                        _.Name,
+                        _.FullName,
+                        _.Extension,
+                        _.Length,
+                        _.CreationTime,
+                        _.LastWriteTime,
+                    });
+        }
+```
+
+You can test with _Postman_ by creating a simple _GET_ request to
+[localhost/WebApplication2/api/files](localhost/WebApplication2/api/files). Don't forget to place
+some dummy files in there [App_Data/Uploads](src/WebApplication1/WebApplication2/App_Data/Uploads).
