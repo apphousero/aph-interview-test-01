@@ -12,19 +12,11 @@ namespace WebApplication2.Controllers
 {
     public class FilesController : ApiController
     {
-
-        /// <summary>
-        /// Gets upload dir.
-        /// </summary>
-        public static string UploadDir
-        {
-            get { return HttpContext.Current.Server.MapPath("~/App_Data/Upload"); }
-        }
-
+        
         // GET api/files
         public IHttpActionResult Get()
         {
-            var files = Directory.GetFiles(UploadDir, "*.zip");
+            var files = Directory.GetFiles(WebApiApplication.UploadDir, "*.zip");
             // Get file system info for each file.
             var res = from _ in files
                       select new FileInfo(_);
@@ -53,7 +45,7 @@ namespace WebApplication2.Controllers
                 res.ReasonPhrase = "No file ID provided.";
                 throw new HttpResponseException(res);
             }
-            var fp = Path.Combine(UploadDir, id);
+            var fp = Path.Combine(WebApiApplication.UploadDir, id);
             if (!File.Exists(fp))
             {
                 res.StatusCode = HttpStatusCode.NotFound;
