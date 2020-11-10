@@ -82,3 +82,6 @@ They are navigatable using:
 
 * [http://localhost/WebApplication1](http://localhost/WebApplication1)
 * [http://localhost/WebApplication2](http://localhost/WebApplication2)
+
+Use [http://localhost/WebApplication2/api/values](http://localhost/WebApplication2/api/values) to test
+the mock API that VS template created.
