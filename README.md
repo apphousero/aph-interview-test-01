@@ -134,4 +134,4 @@ a _system.diagnostics_ section like this (the log file name will be *__.log*):
 ```
 
 Logging is setup the same for the frontend.
-[See this article on logging.](https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/how-to-create-and-initialize-trace-listeners)
+[See this article on logging and tracing to file.](https://docs.microsoft.com/en-us/dotnet/framework/debug-trace-profile/how-to-create-and-initialize-trace-listeners)
