@@ -213,7 +213,7 @@ Response should look like this:
 Now let's implement _Get(string id)_ method.
 
 ```csharp
-        // GET api/files?id=see.zip
+        // GET api/files/see.zip
         public HttpResponseMessage Get(string id)
         {
             // Create HTTP Response.
@@ -228,8 +228,8 @@ Now let's implement _Get(string id)_ method.
             var fp = Path.Combine(UploadDir, id);
             if (!File.Exists(fp))
             {
-                res.StatusCode = HttpStatusCode.BadRequest;
-                res.ReasonPhrase = $"File '{fp}' not found!";
+                res.StatusCode = HttpStatusCode.NotFound;
+                res.ReasonPhrase = $"File id not found!";
                 throw new HttpResponseException(res);
             }
             // Read the File into a Byte Array.

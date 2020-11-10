@@ -57,7 +57,7 @@ namespace WebApplication2.Controllers
             if (!File.Exists(fp))
             {
                 res.StatusCode = HttpStatusCode.NotFound;
-                res.ReasonPhrase = $"File '{fp}' not found!";
+                res.ReasonPhrase = $"File id not found!";
                 throw new HttpResponseException(res);
             }
             // Read the File into a Byte Array.
