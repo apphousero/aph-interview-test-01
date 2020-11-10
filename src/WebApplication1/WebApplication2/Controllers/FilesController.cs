@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 
@@ -40,10 +41,37 @@ namespace WebApplication2.Controllers
                     });
         }
 
-        // GET api/files/5
-        public string Get(int id)
+        // GET api/files/see.zip
+        public HttpResponseMessage Get(string id)
         {
-            return "value";
+            // Create HTTP Response.
+            var res = Request.CreateResponse(HttpStatusCode.OK);
+            // Check file id parameter.
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                res.StatusCode = HttpStatusCode.BadRequest;
+                res.ReasonPhrase = "No file ID provided.";
+                throw new HttpResponseException(res);
+            }
+            var fp = Path.Combine(UploadDir, id);
+            if (!File.Exists(fp))
+            {
+                res.StatusCode = HttpStatusCode.BadRequest;
+                res.ReasonPhrase = $"File '{fp}' not found!";
+                throw new HttpResponseException(res);
+            }
+            // Read the File into a Byte Array.
+            var bytes = File.ReadAllBytes(fp);
+            // Set the Response Content.
+            res.Content = new ByteArrayContent(bytes);
+            // Set the Response Content Length.
+            res.Content.Headers.ContentLength = bytes.LongLength;
+            // Set the Content Disposition Header Value and FileName.
+            res.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            res.Content.Headers.ContentDisposition.FileName = id;
+            // Set the File Content Type as byte stream (browsers will download instead of display).
+            res.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            return res;
         }
 
         // POST api/files

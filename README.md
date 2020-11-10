@@ -209,3 +209,43 @@ Response should look like this:
     }
 ]
 ```
+
+Now let's implement _Get(string id)_ method.
+
+```csharp
+        // GET api/files?id=see.zip
+        public HttpResponseMessage Get(string id)
+        {
+            // Create HTTP Response.
+            var res = Request.CreateResponse(HttpStatusCode.OK);
+            // Check file id parameter.
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                res.StatusCode = HttpStatusCode.BadRequest;
+                res.ReasonPhrase = "No file ID provided.";
+                throw new HttpResponseException(res);
+            }
+            var fp = Path.Combine(UploadDir, id);
+            if (!File.Exists(fp))
+            {
+                res.StatusCode = HttpStatusCode.BadRequest;
+                res.ReasonPhrase = $"File '{fp}' not found!";
+                throw new HttpResponseException(res);
+            }
+            // Read the File into a Byte Array.
+            var bytes = File.ReadAllBytes(fp);
+            // Set the Response Content.
+            res.Content = new ByteArrayContent(bytes);
+            // Set the Response Content Length.
+            res.Content.Headers.ContentLength = bytes.LongLength;
+            // Set the Content Disposition Header Value and FileName.
+            res.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            res.Content.Headers.ContentDisposition.FileName = id;
+            // Set the File Content Type as byte stream (browsers will download instead of display).
+            res.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            return res;
+        }
+```
+
+After rebuilding you should be able to download file using this link
+[http://localhost/WebApplication2/api/files?id=see.zip](http://localhost/WebApplication2/api/files?id=see.zip).
