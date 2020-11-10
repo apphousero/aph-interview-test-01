@@ -11,10 +11,28 @@ date of loading in the system, archiving time, operation status (success, error)
 
 ## Solution
 
-### Create web app
+### 1 - Create web app
 
 This application will be the frontend - the UI. This is where file upload logic is implemented.
 
-### Create api app
+Steps in VS 2019 Community:
+
+1. File -> New project -> filter by _mvc_ -> select _ASP.NET Web Application (.NET Framework)_
+1. First page -> you can leave default (just remember path)
+1. Select MVC, and and finish
+
+Now, a solution named the same as the project is created, e.g. _WebApplication1_.
+
+### 2 - Create api app
 
 This application handle request to archive file - this will be the API. This is where API logic is implemented.
+
+First, follow previous steps.
+
+Steps in VS 2019 Community:
+
+1. In solution explorer, right click the e.g. _WebApplication1_ solution (above the _WebApplication1_ project).
+1. Add -> New Project -> filter by _mvc_ again -> select _ASP.NET Web Application (.NET Framework)_
+1. First page -> you can leave default
+1. Select _Web API_
+1. Create
