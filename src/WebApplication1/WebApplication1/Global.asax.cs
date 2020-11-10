@@ -10,6 +10,7 @@ namespace WebApplication1
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -17,5 +18,12 @@ namespace WebApplication1
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            System.Diagnostics.Trace.TraceError($"Unhandled exception: {ex}");
+        }
+
     }
 }

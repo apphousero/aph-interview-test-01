@@ -18,7 +18,7 @@ for IIS install.
 
 **Use VS2019 in administrator mode for IIS integration to work!!!**
 
-### 1 - Create web app
+### 1 - Create web app - aka frontend
 
 This application will be the frontend - the UI. This is where file upload logic is implemented.
 
@@ -30,7 +30,7 @@ Steps in VS 2019 Community:
 
 Now, a solution named the same as the project is created, e.g. _WebApplication1_.
 
-### 2 - Create api app
+### 2 - Create api app - aka backend
 
 This application handle request to archive file - this will be the API. This is where API logic is implemented.
 
@@ -85,3 +85,52 @@ They are navigatable using:
 
 Use [http://localhost/WebApplication2/api/values](http://localhost/WebApplication2/api/values) to test
 the mock API that VS template created.
+
+Now we are setup and can move on to changing the source code.
+
+## Source code solution
+
+### API aka backend - first part
+
+We need to create an file upload folder on the local disk (easiest option).
+The easiest way is to do it on app startup:
+
+This is implemented in *Application_Start* event
+([see this on other app events](https://www.c-sharpcorner.com/uploadfile/aa04e6/major-events-in-global-asax-file/)).
+
+```csharp
+            var uploadDir = Server.MapPath("~/App_Data/Upload");
+            System.Diagnostics.Trace.TraceInformation($"Probing '{uploadDir}' for uploads...");
+            if (!Directory.Exists(uploadDir))
+            {
+                Directory.CreateDirectory(uploadDir);
+                System.Diagnostics.Trace.TraceInformation($"Created '{uploadDir}' for uploads!");
+            }
+```
+
+Also, we are going to hook an error handler into *Application_Error* and configure it to
+trace unhandled exceptions.
+
+```csharp
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            System.Diagnostics.Trace.TraceError($"Unhandled exception: {ex}");
+        }
+```
+
+For the trace to work, we modify _web.config_ file to reflect that by adding
+a _system.diagnostics_ section like this (the log file name will be *__.log*):
+
+```xml
+<system.diagnostics>
+    <trace autoflush="false" indentsize="4">
+      <listeners>
+        <add name="myListener" type="System.Diagnostics.TextWriterTraceListener" initializeData="__.log" />
+        <remove name="Default" />
+      </listeners>
+    </trace>
+  </system.diagnostics>
+```
+
+Logging is setup the same for the frontend.
