@@ -249,3 +249,10 @@ Now let's implement _Get(string id)_ method.
 
 After rebuilding you should be able to download file using this link
 [http://localhost/WebApplication2/api/files?id=see.zip](http://localhost/WebApplication2/api/files?id=see.zip).
+
+#### Implementing processing task
+
+In _WebApplication2_, in _references_, right click and add a reference to _System.IO.Compression_.
+
+Create a folder _Tasks_ and add _ZipProcessingTask.cs_. Check
+[this link for implementation](src/WebApplication1/WebApplication2/Tasks/ZipProcessingTask.cs).
