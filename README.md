@@ -170,7 +170,7 @@ so we will return a serializable list of anonymous type objects (these are
 resolved at compile time) using LINQ like so:
 
 ```csharp
-// GET api/files
+        // GET api/files
         public IHttpActionResult Get()
         {
             var files = Directory.GetFiles(UploadDir, "*.zip");
@@ -194,3 +194,18 @@ resolved at compile time) using LINQ like so:
 You can test with _Postman_ by creating a simple _GET_ request to
 [http://localhost/WebApplication2/api/files](http://localhost/WebApplication2/api/files). Don't forget to place
 some dummy files in there [App_Data/Uploads](src/WebApplication1/WebApplication2/App_Data/Uploads).
+
+Response should look like this:
+
+```json
+[
+    {
+        "Name": "see.zip",
+        "FullName": "D:\\src\\github\\apphousero\\aph-interview-test-01\\src\\WebApplication1\\WebApplication2\\App_Data\\Upload\\see.zip",
+        "Extension": ".zip",
+        "Length": 0,
+        "CreationTime": "2020-11-10T17:53:21.1065436+02:00",
+        "LastWriteTime": "2020-11-10T17:53:21.1065436+02:00"
+    }
+]
+```
