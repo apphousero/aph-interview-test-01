@@ -90,6 +90,8 @@ namespace WebApplication2.Tasks
                 }
                 // Delete file.
                 File.Delete(first);
+                
+                // SQL - update file entry.
             }
             catch (Exception exc)
             {
